@@ -23,11 +23,13 @@ WHERE RowNumber > 页大小*(页数-1)  order by 字段
         {
             return (totalRecord + pageSize - 1) / pageSize;
         }
+        
 集合求差集（此方法比较高效）：
         listLX.ForEach(e => e.Key = e.ToJson().GetMd5());
         listBS.ForEach(e => e.Key = e.ToJson().GetMd5());
         listExcept = listLX.Where(e => listBS.All(o => o.Key != e.Key)).ToList();
         listExceptBSNone = listExcept.Where(p => !listBS.Exists(m => m.CoursewareId == p.CoursewareId)).ToList();
+        
 异步多线程：
         private void TaskCourseBSNone(IBaseDataSynchronizationService synchService, List<CoursePo> listExceptBSNone)
         {
@@ -38,5 +40,6 @@ WHERE RowNumber > 页大小*(页数-1)  order by 字段
             }));
             Task.WaitAll(tasklistNone.ToArray());
         }
+        
 多线程同步：
 Parallel.Invoke(() => TaskCoursewareBSNone(listExceptBSNone), () => TaskCoursewareBSHave(listExceptBSHave));
