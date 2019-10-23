@@ -1,6 +1,7 @@
 # TaskProcessingBigData
 大数据同步方案（数据库分页，内存分页，同步，异步，多线程运用）
 Sqlserver 高性能分页语句：
+
 SELECT TOP 页大小 *
 
 FROM( SELECT ROW_NUMBER() OVER (ORDER BY id) AS RowNumber,* FROM table1 )as A 
@@ -19,18 +20,21 @@ WHERE RowNumber > 页大小*(页数-1)  order by 字段
 --order by 字段 对于同步数据非常重要，便于对比
 
 分页的总页数算法：
+
         public static int GetTotalPage(int totalRecord, int pageSize)
         {
             return (totalRecord + pageSize - 1) / pageSize;
         }
         
 集合求差集（此方法比较高效）：
+
         listLX.ForEach(e => e.Key = e.ToJson().GetMd5());
         listBS.ForEach(e => e.Key = e.ToJson().GetMd5());
         listExcept = listLX.Where(e => listBS.All(o => o.Key != e.Key)).ToList();
         listExceptBSNone = listExcept.Where(p => !listBS.Exists(m => m.CoursewareId == p.CoursewareId)).ToList();
         
 异步多线程：
+
         private void TaskCourseBSNone(IBaseDataSynchronizationService synchService, List<CoursePo> listExceptBSNone)
         {
             var pagelistNone = listExceptBSNone.Paging(1000);
@@ -42,4 +46,6 @@ WHERE RowNumber > 页大小*(页数-1)  order by 字段
         }
         
 多线程同步：
+
 Parallel.Invoke(() => TaskCoursewareBSNone(listExceptBSNone), () => TaskCoursewareBSHave(listExceptBSHave));
+
