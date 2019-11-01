@@ -48,7 +48,6 @@
   <ItemGroup>
     <Compile Include="CommonMethod.cs" />
     <Compile Include="MethodAsync.cs" />
-    <Compile Include="MethodAsyncSpecial.cs" />
     <Compile Include="Model\CoursewarePo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
