@@ -9,7 +9,7 @@ namespace TaskProcessingBigData
     public class MethodAsync
     {
         /// <summary>
-        /// 异步方法
+        /// 异步方法的相关写法
         /// </summary>
         /// <returns></returns>
         public static async Task<string> GetReturnResult()
