@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace TaskProcessingBigData
 {
+    /// <summary>
+    /// 传统异步
+    /// </summary>
     public class MethodAsyncSpecial
     {
         delegate string delegateSayInfo(string info);
